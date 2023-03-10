@@ -1,15 +1,34 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCountries } from "../../store/slices/countries-slice";
 import CountriesItem from "./CountriesItem/CountriesItem";
 import styles from "./CountriesList.module.scss";
 const CountriesList = () => {
-  const countries = useSelector(store => store.countries.countries);
+  const dispatchAction = useDispatch();
+  useEffect(() => {
+    (async function () {
+      dispatchAction(fetchCountries());
+    })();
+  }, []);
+
+  const countries = useSelector(state => state.countries.countries);
+  console.log(countries);
+
+  if (countries.length === 0) {
+    return <h1>te</h1>;
+  }
   return (
-    <ul className={styles.list}>
-      {countries.map(countryInfo => {
-        return <CountriesItem />;
+    <div className={styles.list}>
+      {countries.map(country => {
+        return (
+          <CountriesItem
+            key={`${country.name.common}||${country.name.official}`}
+            flags={country.flags}
+            names={country.name}
+          />
+        );
       })}
-    </ul>
+    </div>
   );
 };
 

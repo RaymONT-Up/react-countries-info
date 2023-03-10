@@ -1,10 +1,10 @@
-import Card from "./components/UI/Card/Card";
+import CountriesList from "./components/CountriesList/CountriesList";
 import Container from "./components/UI/Container/Container";
 
 const App = props => {
   return (
     <Container>
-      <Card></Card>
+      <CountriesList />
     </Container>
   );
 };
