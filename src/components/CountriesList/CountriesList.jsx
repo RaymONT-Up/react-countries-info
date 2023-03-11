@@ -15,7 +15,7 @@ const CountriesList = () => {
   console.log(countries);
 
   if (countries.length === 0) {
-    return <h1>te</h1>;
+    return <h1>S</h1>;
   }
   return (
     <div className={styles.list}>
