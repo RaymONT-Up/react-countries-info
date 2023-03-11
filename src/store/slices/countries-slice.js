@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getCountriesData } from "../../http/countriesApi";
 
 const initialState = {
   countries: [],
@@ -16,14 +17,7 @@ export const fetchCountries = createAsyncThunk(
   "countries/fetchCountries",
   async function (_, { rejectWithValue }) {
     try {
-      const response = await fetch(
-        "https://restcountries.com/v3/all?fields=name,flags"
-      );
-      if (!response.ok) {
-        throw new Error("server error");
-      }
-      const data = await response.json();
-      return data;
+      return getCountriesData();
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -45,7 +39,7 @@ const countriesSlice = createSlice({
     },
     [fetchCountries.fulfilled]: (state, action) => {
       state.status = "success";
-      state.countries = action.payload;
+      state.countries = action.payload || [];
     },
     [fetchCountries.rejected]: setError,
   },

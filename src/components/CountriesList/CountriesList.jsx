@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCountries } from "../../store/slices/countries-slice";
 import CountriesItem from "./CountriesItem/CountriesItem";
@@ -25,6 +25,7 @@ const CountriesList = () => {
             key={`${country.name.common}||${country.name.official}`}
             flags={country.flags}
             names={country.name}
+            countryCode={country.altSpellings[0]}
           />
         );
       })}
