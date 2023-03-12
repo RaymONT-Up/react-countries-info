@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCountries } from "../../store/slices/countries-slice";
+import { getCountries } from "../../store/slices/countries-slice";
 import Loader from "../UI/Loader/Loader";
 import CountriesItem from "./CountriesItem/CountriesItem";
 import styles from "./CountriesList.module.scss";
@@ -12,11 +12,13 @@ const CountriesList = () => {
     countries: countriesArray,
   } = useSelector(state => state.countries);
   useEffect(() => {
-    if (countriesStatus === null) {
-      (async function () {
-        dispatchAction(fetchCountries());
-      })();
-    } else return;
+    (async function () {
+      dispatchAction(getCountries());
+    })();
+
+    // return() => {
+    //   dispatch(deleteData)
+    // }
   }, []);
 
   if (countriesStatus === "loading") {

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCountriesData } from "../../http/countriesApi";
+import { fetchCountriesData } from "../../http/countriesApi";
 
 const initialState = {
   countries: [],
@@ -8,11 +8,11 @@ const initialState = {
 };
 
 // Thunk
-export const fetchCountries = createAsyncThunk(
-  "countries/fetchCountries",
+export const getCountries = createAsyncThunk(
+  "countries/getCountries",
   async function (_, { rejectWithValue }) {
     try {
-      return getCountriesData();
+      return fetchCountriesData();
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -27,16 +27,17 @@ const countriesSlice = createSlice({
       state.countries = action.payload;
     },
   },
+
   extraReducers: {
-    [fetchCountries.pending]: state => {
+    [getCountries.pending]: state => {
       state.status = "loading";
       state.error = null;
     },
-    [fetchCountries.fulfilled]: (state, action) => {
+    [getCountries.fulfilled]: (state, action) => {
       state.status = "success";
       state.countries = action.payload || [];
     },
-    [fetchCountries.rejected]: (state, action) => {
+    [getCountries.rejected]: (state, action) => {
       state.status = "rejected";
       state.error = action.error || null;
     },

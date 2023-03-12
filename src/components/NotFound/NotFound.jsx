@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../UI/Card/Card";
+import Subtitle from "../UI/Subtitle/Subtitle";
+import Title from "../UI/Title/Title";
 import styles from "./NotFound.module.scss";
 const NotFound = props => {
   const title = props.title ? props.title : "Page not found 404 :(";
@@ -10,8 +12,12 @@ const NotFound = props => {
 
   return (
     <Card className={styles.wrapper}>
-      <h1 className={styles.title}>{title}</h1>
-      <h2 className={styles.subtitle}>{subtitle}</h2>
+      <Title as="h1" className={styles.title}>
+        {title}
+      </Title>
+      <Subtitle as="h2" className={styles.subtitle}>
+        {subtitle}
+      </Subtitle>
       <Link className={styles.link} to="/">
         🔙 Back to home
       </Link>
