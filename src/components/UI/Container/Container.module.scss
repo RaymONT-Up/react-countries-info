@@ -1,8 +1,8 @@
 .container {
   position: relative;
   box-sizing: border-box;
-  padding: 0 15px;
-  max-width: 1000px;
+  padding: 0 var(--container-offset);
+  max-width: var(--container-width);
   width: 100%;
   margin: 0 auto;
 }

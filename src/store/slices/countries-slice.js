@@ -7,11 +7,6 @@ const initialState = {
   error: null,
 };
 
-const setError = (state, action) => {
-  state.status = "rejected";
-  state.error = action.payload;
-};
-
 // Thunk
 export const fetchCountries = createAsyncThunk(
   "countries/fetchCountries",
@@ -41,7 +36,10 @@ const countriesSlice = createSlice({
       state.status = "success";
       state.countries = action.payload || [];
     },
-    [fetchCountries.rejected]: setError,
+    [fetchCountries.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = action.error || null;
+    },
   },
 });
 export const countriesActions = countriesSlice.actions;

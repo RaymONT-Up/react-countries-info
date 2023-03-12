@@ -1,12 +1,12 @@
 import React from "react";
-import { Navigate, Route } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import defaultRoutes from "../../routes";
 import { ROUTE_COUNTRIES } from "../../utils/consts";
 import NotFound from "../NotFound/NotFound";
 
 const AppRouter = () => {
   return (
-    <div>
+    <Routes>
       {defaultRoutes.map(({ path, Component }) => {
         return <Route key={path} path={path} element={<Component />} exact />;
       })}
@@ -17,7 +17,7 @@ const AppRouter = () => {
         exact
       />
       <Route path="*" element={<NotFound />} />
-    </div>
+    </Routes>
   );
 };
 

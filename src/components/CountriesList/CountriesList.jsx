@@ -1,25 +1,45 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCountries } from "../../store/slices/countries-slice";
+import Loader from "../UI/Loader/Loader";
 import CountriesItem from "./CountriesItem/CountriesItem";
 import styles from "./CountriesList.module.scss";
 const CountriesList = () => {
   const dispatchAction = useDispatch();
+  const {
+    status: countriesStatus,
+    error: countriesError,
+    countries: countriesArray,
+  } = useSelector(state => state.countries);
   useEffect(() => {
-    (async function () {
-      dispatchAction(fetchCountries());
-    })();
+    if (countriesStatus === null) {
+      (async function () {
+        dispatchAction(fetchCountries());
+      })();
+    } else return;
   }, []);
 
-  const countries = useSelector(state => state.countries.countries);
-  console.log(countries);
-
-  if (countries.length === 0) {
-    return <h1>S</h1>;
+  if (countriesStatus === "loading") {
+    return (
+      <div className={styles.wrapper}>
+        <Loader />;
+      </div>
+    );
+  }
+  if (countriesStatus === "rejected") {
+    return (
+      <div className={styles.wrapper}>
+        <h1 className={styles.title}>Oh sorry... we have error :(</h1>
+        <h2 className={styles.subtitle}>
+          Please try to reload the page or contact the site owner
+        </h2>
+        <p className={styles.paragraph}>{countriesError}</p>
+      </div>
+    );
   }
   return (
     <div className={styles.list}>
-      {countries.map(country => {
+      {countriesArray.map(country => {
         return (
           <CountriesItem
             key={`${country.name.common}||${country.name.official}`}

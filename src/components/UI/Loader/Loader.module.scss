@@ -1,0 +1,26 @@
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.spinner {
+  width: 2em;
+  height: 2em;
+
+  border: 0.3em solid var(--card-bg-color);
+  border-top-color: var(--main-text);
+  border-radius: 50%;
+
+  font-size: 30px;
+
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

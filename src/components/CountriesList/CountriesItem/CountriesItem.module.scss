@@ -11,6 +11,10 @@
     background-color: var(--main-bg-color);
     transform: translateY(5px) scale(1.01);
   }
+  &__link {
+    display: block;
+    text-decoration: none;
+  }
   &__img {
     display: block;
     width: 100%;
@@ -34,5 +38,8 @@
     font-size: 26px;
     font-weight: 600;
     text-align: center;
+    text-decoration: none;
+
+    color: var(--main-text-color);
   }
 }
