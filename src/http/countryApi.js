@@ -1,7 +1,7 @@
 import instance from "./index.js";
 export const fetchCountryData = async countryCode => {
   const response = await instance.get(
-    `/alpha/${countryCode}?fields=name,capital,flags,population,languages,timezones,currencies`
+    `/alpha/${countryCode}?fields=name,capital,flags,population,languages,timezones,currencies,maps,coatOfArms`
   );
   if (response.statusText !== "OK") throw new Error("server error");
   return response.data;
